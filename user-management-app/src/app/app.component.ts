@@ -1,12 +1,35 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { UserListComponent } from './user-list/user-list.component';
+import { UserFormComponent } from './user-form/user-form.component';
+import { UserService } from './user.service';
+import { User } from './user.model';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [FormsModule, UserListComponent, UserFormComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'user-management-app';
+  users: User[] = [];
+  selectedUser: User | null = null; 
+
+  constructor(private userService: UserService) {}
+
+  ngOnInit(): void {
+    this.loadUsers();
+  }
+
+  loadUsers(): void {
+    this.userService.getUsers().subscribe(data => {
+      this.users = data;
+      console.log('Users list updated:', this.users);
+    });
+  }
+  setUserForEdit(user: User): void {
+    this.selectedUser = { ...user };
+    console.log("Editing User:", this.selectedUser);
+  }
 }
