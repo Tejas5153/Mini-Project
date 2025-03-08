@@ -1,37 +1,22 @@
 <div class="container mt-4">
     <h2 class="text-center">{{ user.id === 0 ? 'Add User' : 'Edit User' }}</h2>
 
-    <form (ngSubmit)="saveUser()" #userForm="ngForm" class="card p-4 shadow-lg">
-        <!-- Name Field -->
+    <form (ngSubmit)="saveUser()" class="card p-4 shadow-lg">
         <div class="mb-3">
             <label class="form-label">Name:</label>
-            <input [(ngModel)]="user.name" name="name" required minlength="3" class="form-control" [ngClass]="{'is-invalid': userForm.form.controls['name']?.invalid && userForm.form.controls['name']?.touched}" />
-            <div class="invalid-feedback">
-                Name is required (Min 3 characters)
-            </div>
+            <input [(ngModel)]="user.name" name="name" class="form-control" required minlength="3" />
         </div>
 
-        <!-- Email Field -->
         <div class="mb-3">
             <label class="form-label">Email:</label>
-            <input [(ngModel)]="user.email" name="email" required email class="form-control" [ngClass]="{'is-invalid': userForm.form.controls['email']?.invalid && userForm.form.controls['email']?.touched}" />
-            <div class="invalid-feedback">
-                Enter a valid email
-            </div>
+            <input [(ngModel)]="user.email" name="email" class="form-control" required email />
         </div>
 
-        <!-- Phone Field -->
         <div class="mb-3">
             <label class="form-label">Phone:</label>
-            <input [(ngModel)]="user.phone" name="phone" required pattern="^[0-9]{10}$" class="form-control" [ngClass]="{'is-invalid': userForm.form.controls['phone']?.invalid && userForm.form.controls['phone']?.touched}" />
-            <div class="invalid-feedback">
-                Phone number must be 10 digits
-            </div>
+            <input [(ngModel)]="user.phone" name="phone" class="form-control" required pattern="^[0-9]{10}$" />
         </div>
 
-        <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary w-100" [disabled]="userForm.invalid">
-        {{ user.id === 0 ? 'Add User' : 'Update User' }}
-      </button>
+        <button type="submit" class="btn btn-primary w-100">{{ user.id === 0 ? 'Add User' : 'Update User' }}</button>
     </form>
 </div>

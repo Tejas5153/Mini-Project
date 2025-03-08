@@ -23,7 +23,6 @@ export class UserFormComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['userToEdit'] && this.userToEdit) {
       this.user = { ...this.userToEdit }; 
-      console.log("Form Updated with User:", this.user);
     }
   }
 

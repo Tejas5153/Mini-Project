@@ -25,11 +25,10 @@ export class AppComponent {
   loadUsers(): void {
     this.userService.getUsers().subscribe(data => {
       this.users = data;
-      console.log('Users list updated:', this.users);
     });
   }
   setUserForEdit(user: User): void {
     this.selectedUser = { ...user };
-    console.log("Editing User:", this.selectedUser);
+
   }
 }
